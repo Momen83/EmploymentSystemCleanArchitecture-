@@ -39,14 +39,15 @@ namespace EmploymentSystem.Infrastructure.Services
             var vacancy = await _vacancyRepository.GetVacancyByIdAsync(vacancyId);
             if (vacancy == null)
             {
-                _logger.LogError("Vacacny with id {vacancyId} not found to change status");
+                _logger.LogError($"Vacacny with id {vacancyId} not found to change status");
                 throw new Exception("Vacacny not found");
             }
 
             vacancy.IsActive = !vacancy.IsActive;
             await _vacancyRepository.UpdateVacancyAsync(vacancy);
-            _logger.LogInformation("$\"Vacacny with id {vacancyId} changed status");
-         
+            _logger.LogInformation($"Vacacny with id {vacancyId} changed status");
+            _cache.Remove(VacancyCacheKey);
+
         }
 
 
