@@ -34,7 +34,7 @@ namespace EmploymentSystem.API.Controller
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> SearchVacancies(string title, int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> SearchVacancies(string title = "", int pageNumber = 1, int pageSize = 10)
         {
             var result = await _vacancyService.SearchByTitleAsync(title, pageNumber, pageSize);
             return Ok(result);
